@@ -16,7 +16,8 @@ WebサービスのAPIを使ったマッシュアップのサンプルプログ�
      * project/main.pyの14〜18行目にある「YOUR_*」
  3. http://c4sa.nifty.com/ へアクセスして、Flaskコンテクストでキャンバスを作る
      * pythonの軽量Webフレームワーク
- 4. C4SA上のproject配下にリポジトリのファイルをアップロード
- 5. C4SAコンパネの「デーモン管理」で「gunicorn」を「リスタート」
+ 4. コントロールパネルのCLIで「pip install twython」を実行する
+ 5. C4SA上のproject配下にリポジトリのファイルをアップロード
+ 6. C4SAコンパネの「デーモン管理」で「gunicorn」を「リスタート」
  7. ヘッダー部分にあるURLへアクセスして動作確認する
 
