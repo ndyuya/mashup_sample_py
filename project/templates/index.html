@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>試作品</title>
+    <meta name="viewpoint" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html {height: 100%;}
+      body{height: 100%; margin: 0; padding: 0;}
+      #map_canvas {height: 100%; margin: 0; padding: 0;}
+    </style>
+    <link href="{{ url_for('static', filename='tweet.css') }}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key={{ maps_api_key }}&sensor=false"></script>
+    <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+    <script type="text/javascript">
+      //<![CDATA[
+      function initialize() {
+        var mapOptions = {
+          center: new google.maps.LatLng( {{ lat }} , {{ lng }} ),
+          zoom: 10,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+        var markers = new Array();
+        var infoWindowList = new Array();
+        var addMarker = function(i, content, lat, lng) {
+          infoWindowList[i] = new google.maps.InfoWindow({content: content});
+          markers[i] = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, lng),
+            map: map
+          });
+          google.maps.event.addListener(markers[i], 'click', function(){
+            infoWindowList[i].open(map, markers[i]);
+          });
+        };
+        {% for tw in tweets %}addMarker({{ loop.index0 }}, '{{ tw['emb'] | safe }}', {{ tw['lat'] }}, {{ tw['lng'] }});
+        {% endfor %}
+      }
+      //]]>
+    </script>
+  </head>
+  <body onload="initialize()">
+    <div id="map_canvas"></div>
+  </body>
+</html>

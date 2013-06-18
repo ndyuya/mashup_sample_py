@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    	<title>ツイート取得テスト</title>
+    </head>
+    <body>
+    	<table border="1" frame="box">
+    	{% for tw in tweets %}
+        	<tr>
+            	<td>{{ tw['name'] }}</td>
+                <td>{{ tw['screen_name'] }}</td>
+                <td>{{ tw['text'] }}</td>
+                <td>{{ tw['created_at'] }}</td>
+                <td>{{ tw['lat'] }}</td>
+                <td>{{ tw['lng'] }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </body>
+</html>
