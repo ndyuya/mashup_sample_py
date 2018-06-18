@@ -4,18 +4,18 @@ from flask import Flask
 from flask import render_template
 from twython import Twython
 from xml.sax.saxutils import *
-import urllib, re
+import urllib, re, os
 app = Flask(__name__)
 
 q = u'駅'
 lat = 35.691914
 lng = 139.70034
 
-maps_api_key = 'YOUR_GOOGLE_MAPS_API_KEY'
-tw_consumer_key = 'YOUR_TWITTER_CONSUMER_KEY'
-tw_consumer_secret = 'YOUR_TWITTER_CONSUMER_SECRET'
-tw_access_token = 'YOUR_TWITTER_ACCESS_TOKEN'
-tw_access_token_secret = 'YOUR_TWITTER_ACCESS_TOKEN_SECRET'
+maps_api_key = os.environ["GOOGLE_MAPS_API_KEY"]
+tw_consumer_key = os.environ["TWITTER_CONSUMER_KEY"]
+tw_consumer_secret = os.environ["TWITTER_CONSUMER_SECRET"]
+tw_access_token = os.environ["TWITTER_ACCESS_TOKEN"]
+tw_access_token_secret = os.environ["TWITTER_ACCESS_TOKEN_SECRET"]
 
 def escapeText(target):
 	return escape(target, {"'": '&apos;'})
@@ -42,7 +42,7 @@ def embedTweet(tw):
 
 def getTweet():
 	client = Twython(tw_consumer_key, tw_consumer_secret, tw_access_token, tw_access_token_secret)
-	res = client.search(q=urllib.quote_plus(q.encode('utf-8')), count=100, geocode="%f,%f,30km" % (lat,lng))
+	res = client.search(q=urllib.parse.quote_plus(q.encode('utf-8')), count=100, geocode="%f,%f,30km" % (lat,lng))
 	statuses = []
 	for tw in res['statuses']:
 		if tw['geo'] is not None:
@@ -60,4 +60,4 @@ def tweets():
 	return render_template('tweets.html', tweets=tweets)
 
 if __name__ == '__main__':
-	app.run()
+	app.run(host="0.0.0.0", port=5000, debug=True)

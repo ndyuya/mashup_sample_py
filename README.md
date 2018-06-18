@@ -12,12 +12,19 @@ WebサービスのAPIを使ったマッシュアップのサンプルプログ�
      * Twitter [Consumer secret]
      * Twitter [Access Token]
      * Twitter [Access Token secret]
- 2. 1.で取得したキーをそれぞれファイルに書き込む
-     * project/main.pyの14〜18行目にある「YOUR_*」
- 3. http://c4sa.nifty.com/ へアクセスして、Flaskコンテクストでキャンバスを作る
-     * pythonの軽量Webフレームワーク
- 4. コントロールパネルのCLIで「pip install twython」を実行する
- 5. C4SA上のproject配下にリポジトリのファイルをアップロード
- 6. C4SAコンパネの「デーモン管理」で「gunicorn」を「リスタート」
- 7. ヘッダー部分にあるURLへアクセスして動作確認する
-
+ 2. Dockerイメージをビルドする
+ ```
+ docker build -t flask .
+ ```
+ 3. 各種キーを環境変数に指定して、Dockerコンテナを起動する
+ ```
+ docker run \
+ -e GOOGLE_MAPS_API_KEY="YOUR_GOOGLE_MAPS_API_KEY" \
+ -e TWITTER_CONSUMER_KEY="YOUR_TWITTER_CONSUMER_KEY" \
+ -e TWITTER_CONSUMER_SECRET="YOUR_TWITTER_CONSUMER_SECRET" \
+ -e TWITTER_ACCESS_TOKEN="YOUR_TWITTER_ACCESS_TOKEN" \
+ -e TWITTER_ACCESS_TOKEN_SECRET="YOUR_TWITTER_ACCESS_TOKEN_SECRET" \
+ -p 5000:5000 \
+ -it flask
+ ```
+ 4. http://127.0.0.1:5000/ にアクセスする
