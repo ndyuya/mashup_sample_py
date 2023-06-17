@@ -8,10 +8,7 @@ WebサービスのAPIを使ったマッシュアップのサンプルプログ�
  0. このリポジトリのファイルを取得 (cloneでもzipダウンロードでも可)
  1. Google Maps APIとTwitterのAPIを使えるように準備する
      * Google API key
-     * Twitter [Consumer key]
-     * Twitter [Consumer secret]
-     * Twitter [Access Token]
-     * Twitter [Access Token secret]
+     * リクルートWEBサービス API Key <a href="http://webservice.recruit.co.jp/"><img src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif" alt="ホットペッパー Webサービス" width="135" height="17" border="0" title="ホットペッパー Webサービス"></a>
  2. Dockerイメージをビルドする
  ```
  docker build -t flask .
@@ -20,10 +17,7 @@ WebサービスのAPIを使ったマッシュアップのサンプルプログ�
  ```
  docker run \
  -e GOOGLE_MAPS_API_KEY="YOUR_GOOGLE_MAPS_API_KEY" \
- -e TWITTER_CONSUMER_KEY="YOUR_TWITTER_CONSUMER_KEY" \
- -e TWITTER_CONSUMER_SECRET="YOUR_TWITTER_CONSUMER_SECRET" \
- -e TWITTER_ACCESS_TOKEN="YOUR_TWITTER_ACCESS_TOKEN" \
- -e TWITTER_ACCESS_TOKEN_SECRET="YOUR_TWITTER_ACCESS_TOKEN_SECRET" \
+ -e RECRUIT_API_KEY="YOUR_RECRUIT_API_KEY" \
  -p 5000:5000 \
  -it flask
  ```

@@ -7,16 +7,16 @@
       html {height: 100%;}
       body{height: 100%; margin: 0; padding: 0;}
       #map_canvas {height: 100%; margin: 0; padding: 0;}
+      #credit {position: absolute; top: 20px; left: 200px;}
     </style>
-    <link href="{{ url_for('static', filename='tweet.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='shop.css') }}" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key={{ maps_api_key }}&sensor=false"></script>
-    <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
     <script type="text/javascript">
       //<![CDATA[
       function initialize() {
         var mapOptions = {
           center: new google.maps.LatLng( {{ lat }} , {{ lng }} ),
-          zoom: 10,
+          zoom: 14,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
@@ -32,7 +32,7 @@
             infoWindowList[i].open(map, markers[i]);
           });
         };
-        {% for tw in tweets %}addMarker({{ loop.index0 }}, '{{ tw['emb'] | safe }}', {{ tw['lat'] }}, {{ tw['lng'] }});
+        {% for shop in shops %}addMarker({{ loop.index0 }}, '{{ shop['content'] | safe }}', {{ shop['lat'] }}, {{ shop['lng'] }});
         {% endfor %}
       }
       //]]>
@@ -40,5 +40,10 @@
   </head>
   <body onload="initialize()">
     <div id="map_canvas"></div>
+    <div id="credit">
+      <a href="http://webservice.recruit.co.jp/">
+        <img src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif" alt="ホットペッパー Webサービス" width="135" height="17" border="0" title="ホットペッパー Webサービス">
+      </a>
+    </div>
   </body>
 </html>

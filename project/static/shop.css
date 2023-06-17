@@ -1,0 +1,22 @@
+.shop {
+	position: relative;
+	width: 450px;
+}
+
+.shop_name {
+	width: 100%;
+	position: relative;
+}
+
+.shop_image {
+    top: 0;
+    left: 0;
+}
+
+.shop_name:hover {
+	text-decoration: underline;
+}
+
+.shop_catch {
+	margin: 8px 2px;
+}

@@ -1,4 +1,4 @@
-FROM python:3.6.5-alpine3.7
+FROM python:3.11.4-alpine3.18
 
 ARG project_dir=/web/project
 
